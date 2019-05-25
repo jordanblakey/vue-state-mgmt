@@ -52,6 +52,10 @@ Modules - Each module can have its own state, getters, actions & mutations (post
 
 ### Creating the Store
 
+Creating the store to be used by Vue to manage state.
+
+- `vue <= store <= module`
+
 ```js
 // src/store/index.js
 import Vuex from 'vuex'
@@ -67,14 +71,18 @@ export default new Vuex.Store({
 })
 ```
 
-Creating store modules to handle `state`, `getters`, `actions`, `mutations`:
-
 ### Creating a Module
+
+Creating store modules to handle `state`, `getters`, `actions`, `mutations`. Data flows like this:
+
+- `component <= getter <= state <= mutations <= action`
 
 ```js
 // src/store/modules/todos.js
 import axios from 'axios'
-const state = {}
+const state = {
+  // The keys and data
+}
 const getters = {}
 const actions = {}
 const mutations = {}

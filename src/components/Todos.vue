@@ -10,11 +10,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Todos',
-  computed: mapGetters(['allTodos'])
+  methods: {
+    ...mapActions(['fetchTodos'])
+  },
+  computed: mapGetters(['allTodos']),
+  created() {
+    this.fetchTodos()
+  }
 }
 </script>
 
@@ -25,7 +31,6 @@ export default {
   grid-gap: 1rem;
 
   .todo {
-    border: 1px solid #ccc;
     background: #41b883;
     padding: 1rem;
     border-radius: 5px;

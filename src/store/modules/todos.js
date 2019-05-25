@@ -1,25 +1,40 @@
 import axios from 'axios'
 
 const state = {
-  todos: [
-    {
-      id: 1,
-      title: 'Todo One'
-    },
-    {
-      id: 2,
-      title: 'Todo Two'
-    }
-  ]
+  // The keys and values for this modules to update the store with
+  todos: []
 }
 
 const getters = {
+  // Accessed by the component with mapGetters
   allTodos: state => state.todos
 }
 
-const actions = {}
+const actions = {
+  // make request
+  async fetchTodos({ commit }) {
+    // wait for response
+    const response = await axios.get(
+      'https://jsonplaceholder.typicode.com/todos'
+    )
+    // pass response payload to mutation setTodos
+    commit('setTodos', response.data)
+  },
 
-const mutations = {}
+  async addTodo({ commit }, title) {
+    const response = await axios.post(
+      'https://jsonplaceholder.typicode.com/todos',
+      { title, completed: false }
+    )
+    commit('newTodo', response.data)
+  }
+}
+
+const mutations = {
+  // update state.todos array with fetched array of objects
+  setTodos: (state, todos) => (state.todos = todos),
+  newTodo: (state, todo) => state.todos.unshift(todo)
+}
 
 export default {
   state,

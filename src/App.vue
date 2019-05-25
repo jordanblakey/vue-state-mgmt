@@ -1,23 +1,26 @@
 <template>
   <div id="app">
     <div class="container">
+      <AddTodo />
       <Todos />
     </div>
   </div>
 </template>
 
 <script>
-import Todos from './components/Todos.vue'
+import Todos from './components/Todos'
+import AddTodo from './components/AddTodo'
 
 export default {
   name: 'app',
   components: {
-    Todos
+    Todos,
+    AddTodo
   }
 }
 </script>
 
-<style>
+<style lang="less">
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,7 +28,12 @@ body {
   background: #e8f7f0;
   line-height: 1.4;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+form,
+input {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
 }
 
 .container {
