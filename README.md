@@ -38,10 +38,51 @@ Modules - Each module can have its own state, getters, actions & mutations (post
 `yarn global add @vue/cli`: Install Vue CLI globally.
 `vue --version`: Check Vue CLI Version
 `vue create vue-state-mgmt; cd vue-state-mgmt`: Bootstrap Vue Project.
-`yarn add vuex axios`: Add Vuex for state mgmt and Axios for http requests.
+`yarn add vuex axios less less-loader`: Add `vuex` for state mgmt and `axios` for http requests. Add `less` and `less-loader` for LESS support.
 
 ## Commands
 
 `yarn lint`: Lint all JS in `src`
 `yarn serve`: Start the dev server @ `localhost:8080`.
 `yarn build`: Build files for production in `dist`.
+
+---
+
+## VueX Boilerplate
+
+### Creating the Store
+
+```js
+// src/store/index.js
+import Vuex from 'vuex'
+import Vue from 'vue'
+import todos from './modules/todos'
+
+// Load Vuex
+Vue.use(Vuex)
+
+// Create store
+export default new Vuex.Store({
+  modules: { todos }
+})
+```
+
+Creating store modules to handle `state`, `getters`, `actions`, `mutations`:
+
+### Creating a Module
+
+```js
+// src/store/modules/todos.js
+import axios from 'axios'
+const state = {}
+const getters = {}
+const actions = {}
+const mutations = {}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+}
+```
