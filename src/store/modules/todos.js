@@ -26,14 +26,22 @@ const actions = {
       'https://jsonplaceholder.typicode.com/todos',
       { title, completed: false }
     )
-    commit('newTodo', response.data)
+    commit('addTodo', response.data)
+  },
+
+  async deleteTodo({ commit }, id) {
+    await axios.delete('https://jsonplaceholder.typicode.com/todos/' + id)
+    commit('deleteTodo', id)
   }
 }
 
 const mutations = {
   // update state.todos array with fetched array of objects
   setTodos: (state, todos) => (state.todos = todos),
-  newTodo: (state, todo) => state.todos.unshift(todo)
+  addTodo: (state, todo) => state.todos.unshift(todo),
+  deleteTodo: (state, id) => {
+    state.todos = state.todos.filter(todo => todo.id !== id)
+  }
 }
 
 export default {
