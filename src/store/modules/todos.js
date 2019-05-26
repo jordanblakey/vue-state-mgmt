@@ -1,3 +1,4 @@
+// Todos Vuex Module
 import axios from 'axios'
 
 const state = {
@@ -30,8 +31,19 @@ const actions = {
   },
 
   async deleteTodo({ commit }, id) {
-    await axios.delete('https://jsonplaceholder.typicode.com/todos/' + id)
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
     commit('deleteTodo', id)
+  },
+
+  async filterTodos({ commit }, event) {
+    // Get selected number
+    const limit = parseInt(
+      event.target.options[event.target.options.selectedIndex].innerText
+    )
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos/?_limit=${limit}`
+    )
+    commit('setTodos', response.data)
   }
 }
 
